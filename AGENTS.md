@@ -1,3 +1,23 @@
+## Project context
+
+- This checkout is the TypeScript RSSHub application with route generation, worker builds, and Vitest coverage.
+- Most risky edits touch `lib/`, route definitions, route metadata, or build scripts under `scripts/workflow/`.
+- Route correctness matters more than stylistic cleanup.
+
+## Workflow
+
+1. Read the relevant route folder and existing route metadata before changing behavior.
+2. Prefer API-backed fetching over scraping, and keep item generation deterministic.
+3. When changing route metadata or examples, make sure docs and generated route assets still agree.
+4. Run focused validation before broader formatting or test passes.
+
+## Preferred validation
+
+- `pnpm install`
+- `pnpm build:routes`
+- `pnpm lint`
+- `pnpm vitest`
+
 ## Review guidelines
 
 ### Route Configuration

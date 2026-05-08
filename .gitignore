@@ -42,3 +42,8 @@ yarn.lock
 yarn-error.log
 
 dist-container
+# Agent session files
+AGENTS.md
+init.sh
+feature_list.json
+progress.md
