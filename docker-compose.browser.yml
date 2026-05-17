@@ -1,0 +1,29 @@
+services:
+    rsshub:
+        environment:
+            PLAYWRIGHT_WS_ENDPOINT: 'ws://browserless:3000'
+            PUPPETEER_WS_ENDPOINT: 'ws://browserless:3000'
+            PUPPETEER_REAL_BROWSER_SERVICE: 'http://real-browser:3000'
+        depends_on:
+            - redis
+            - browserless
+            - real-browser
+
+    browserless:
+        image: browserless/chrome
+        restart: unless-stopped
+        ulimits:
+            core:
+                hard: 0
+                soft: 0
+        healthcheck:
+            test: ['CMD', 'curl', '-f', 'http://localhost:3000/pressure']
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    real-browser:
+        image: ghcr.io/hyoban/puppeteer-real-browser-hono
+        restart: unless-stopped
+        ports:
+            - '3001:3000'
